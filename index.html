@@ -77,12 +77,12 @@
                 domainsEncrypted.forEach(function(encoded, index) {
                     var decoded = atob(encoded); // Decode Base64
                     $('#links').append(
-                        `<a href="http://${decoded}" target="_blank" class="card bg-white shadow-md rounded-lg p-4 mb-4 flex items-center justify-between w-full max-w-lg cursor-pointer">
+                        `<a href="https://${decoded}" target="_blank" class="card bg-white shadow-md rounded-lg p-4 mb-4 flex items-center justify-between w-full max-w-lg cursor-pointer">
                             <span class="font-semibold text-sm text-gray-700">Link ${index + 1}</span>
                             <div class="divider-vertical"></div>
                             <span class="text-blue-600 hover:text-blue-500 flex-grow text-center">官网 ${index + 1}</span>
                             <div class="divider-vertical"></div>
-                            <span onclick="copyToClipboard(event, '${decoded}')" class="copy-btn text-gray-500 hover:text-gray-700">
+                            <span onclick="copyToClipboard(event, 'https://${decoded}')" class="copy-btn text-gray-500 hover:text-gray-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h11a2 2 0 012 2v1"></path>
