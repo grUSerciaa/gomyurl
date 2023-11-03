@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>域名引导页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="./src/index.css" rel="stylesheet">
+    <script src="./src/jquery.min.js"></script>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+            z-index: 1000;
+        }
+        .divider-vertical {
+            height: 24px;
+            border-left: 1px solid #d1d5db; /* Gray line */
+            margin: 0 12px;
+        }
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .card {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div id="loader" class="flex flex-col items-center justify-center h-screen">
+        <div class="loader"></div>
+        <div class="text-lg mt-4">加载中...</div>
+    </div>
+    <div id="content" class="hidden p-4">
+        <div id="links" class="flex flex-col items-center justify-center min-h-screen"></div>
+    </div>
+    <div class="notification" id="notification"></div>
+    <footer class="flex justify-center items-center h-16">
+        <span class="text-sm text-gray-500">© Flyint飞数</span>
+    </footer>
+
+    <script>
+        var domainsEncrypted = [
+        "d3d3LmZlaXNodTExMS5jb20vIy9yZWdpc3Rlcj9jb2RlPTVidld5QTY0", 
+        "d3d3LmZseWludDIyMi5jb20vIy9yZWdpc3Rlcj9jb2RlPTVidld5QTY0", 
+        "d3d3LmZseWludDk5OS5jb20vIy9yZWdpc3Rlcj9jb2RlPTVidld5QTY0",
+        "Z29mbHlpbnQuY29tLyMvcmVnaXN0ZXI/Y29kZT01YnZXeUE2NA==",
+        "d3d3LnN1c21tLmNvbS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ=",
+        "d3d3LnVzZmx5aW50LmNvbS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ="
+      ];
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#loader').fadeOut();
+                $('#content').fadeIn();
+
+                domainsEncrypted.forEach(function(encoded, index) {
+                    var decoded = atob(encoded); // Decode Base64
+                    $('#links').append(
+                        `<a href="http://${decoded}" target="_blank" class="card bg-white shadow-md rounded-lg p-4 mb-4 flex items-center justify-between w-full max-w-lg cursor-pointer">
+                            <span class="font-semibold text-sm text-gray-700">Link ${index + 1}</span>
+                            <div class="divider-vertical"></div>
+                            <span class="text-blue-600 hover:text-blue-500 flex-grow text-center">官网 ${index + 1}</span>
+                            <div class="divider-vertical"></div>
+                            <span onclick="copyToClipboard(event, '${decoded}')" class="copy-btn text-gray-500 hover:text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h11a2 2 0 012 2v1"></path>
+                                </svg>
+                            </span>
+                        </a>`
+                    );
+                });
+            }, 3000); // Delay to show the content after 3 seconds
+        });
+
+        function copyToClipboard(event, text) {
+            event.preventDefault();
+            event.stopPropagation();
+            navigator.clipboard.writeText(text).then(function() {
+                $('#notification').text('复制成功！').fadeIn(200).delay(1500).fadeOut(200);
+            }, function(err) {
+                $('#notification').text('复制失败，请手动复制: ' + err).fadeIn(200).delay(3000).fadeOut(200);
+            });
+        }
+    </script>
+</body>
+</html>
