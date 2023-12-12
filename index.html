@@ -67,7 +67,11 @@
         "d3d3LmZseWludDk5OS5jb20vIy9yZWdpc3Rlcj9jb2RlPTVidld5QTY0",
         "Z29mbHlpbnQuY29tLyMvcmVnaXN0ZXI/Y29kZT01YnZXeUE2NA==",
         "d3d3LnN1c21tLmNvbS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ=",
-        "d3d3LnVzZmx5aW50LmNvbS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ="
+        "d3d3LnVzZmx5aW50LmNvbS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ=",
+        "d3d3LnN1c21tYS5tZS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ=",
+        "d3d3LnN1c21tYi5tZS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ=",
+        "d3d3LnVzZmx5aW50YS5tZS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ=",
+        "d3d3LnVzZmx5aW50Yi5tZS8jL3JlZ2lzdGVyP2NvZGU9NWJ2V3lBNjQ="
       ];
         $(document).ready(function() {
             setTimeout(function() {
@@ -75,7 +79,7 @@
                 $('#content').fadeIn();
 
                 domainsEncrypted.forEach(function(encoded, index) {
-                    var decoded = atob(encoded); // Decode Base64
+                    var decoded = atob(encoded);
                     $('#links').append(
                         `<a href="https://${decoded}" target="_blank" class="card bg-white shadow-md rounded-lg p-4 mb-4 flex items-center justify-between w-full max-w-lg cursor-pointer">
                             <span class="font-semibold text-sm text-gray-700">Link ${index + 1}</span>
